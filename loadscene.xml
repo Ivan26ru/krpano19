@@ -1,0 +1,2 @@
+loadscene - загрузить сцену
+loadscene(scene1);
