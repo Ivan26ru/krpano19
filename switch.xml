@@ -1,0 +1,13 @@
+switch - изменения значений по клику
+
+Parameters:
+variable
+The variable that should be switched / changed.
+value1, value2, ... (optionally)
+
+Пример:
+switch(fullscreen);
+switch(layer[button1].visible);
+switch(layer[button1].alpha, 1.0, 0.5);
+switch(layer[child].parent, button1, button2, button3);
+switch(destpos, -100, 0, +100); tween(y,get(destpos));
