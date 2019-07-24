@@ -1,0 +1,9 @@
+openurl - открыть ссылку
+
+openurl('http://www.1panorama.ru',  _blank)  - открыть ссылку
+
+url - который надо открыть
+target* – как нужно открыть (в новом или в этом же окне браузера). Здесь нам подойдет параметр _blank (открыть в новом окне).
+
+Пример:
+onclick="openurl('http://www.1panorama.ru',  _blank)"
