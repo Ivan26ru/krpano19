@@ -1,0 +1,15 @@
+delayedcall - отсрочка выполнения в секундах
+stopdelayedcall - отменить отсрочку
+
+
+id,время,что выполнить
+delayedcall(id,time, action());
+
+пример: 
+delayedcall(dc_1,1098, stopsound(all_sound));
+
+id которое нужно отменит
+stopdelayedcall(id);
+
+пример:
+stopdelayedcall(dc_1);
