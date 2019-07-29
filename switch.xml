@@ -1,5 +1,7 @@
 switch - изменения значений по клику
 
+важный момент, что б первое значение совпадало с текущим значением, иначе может не сработать
+
 Parameters:
 variable
 The variable that should be switched / changed.
