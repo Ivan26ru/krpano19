@@ -10,7 +10,7 @@
 	
 	<?php 
 
-	$n1 = 1;
+	$n1 = 0;
 	$n1_max = 5;
 
 	$n2 = 0;
@@ -18,43 +18,151 @@
 
 
 	$n3 = 0;
-	$n3_max = 10;
+	$n3_max = 15;
 
 	$n4=0;
-	$n4_max = 10;
-	$url="http://www.dance-school.moscow/3d-tourdata/street_new_10/";
+	$n4_max = 15;
+
+// массив сцен
+$scene_arr = array(
+	"street_new_10",
+	"lobby2_13",
+	"lobby1_17",
+	"bar_19",
+	"chocolate_corridor_24",
+	"massage_29",
+	"chocolate_32",
+	"shop_68",
+	"cappuccino_corridor_99",
+	"cappuccino_diamond_144",
+	"diamond_corridor_149",
+	"locker_vip_156",
+	"locker_men_159",
+	"magnolia_corridor_164",
+	"locker_kids_168",
+	"locker_women1_172",
+	"locker_women2_174",
+	"new_york_corridor_181",
+	"new_york_183",
+	"solarium_185",
+	"magnolia_191 ",
+
+);
+
+
+$url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог панорамы
+
 	// $url_img="http://www.dance-school.moscow/3d-tourdata/street_new_10/0/0/1_1.jpg";
 
-	
-// while ($n1 <= $n1_max) {
-// 	$n2 = 0;
+	// echo if_404($url_img);
+  
+  // перебор сцен
+  foreach ($scene_arr as $name_scene) {
+	$name_scene = $name_scene . '/';
+    echo $name_scene;
+    unset($url);
+	$url= $url_krpano . $name_scene;//каталог сцены
+    
+	while ($n1 <= $n1_max) {
+		$n2 = 0;
+		mkdir($name_scene . $n1,0777,true);
 
-	while ($n2 <= $n2_max) {
-		$n3 = 0;
-		echo "<p class='text'>";
+		while ($n2 <= $n2_max) {
+			switch ($n2) {
+				case 0:
+					$n3_max = 1;
+					$n4_max = 1;
+					break;
+				
+				case 1:
+					$n3_max = 2;
+					$n4_max = 2;
+					break;
+				
+				case 2:
+					$n3_max = 5;
+					$n4_max = 5;
+					break;
+				
+				case 3:
+					$n3_max = 11;
+					$n4_max = 11;
+					break;
+				
+				default:
+					$n3_max = 15;
+					$n4_max = 15;
+					break;
+			}
 
-		while ($n3 <= $n3_max) {
-			$n4=0;
-			while ($n4 <= $n4_max) {
-				unset($url_img);
-				$url_img =  $url . $n1 . '/' . $n2 . '/'. $n3 . '_' . $n4 . '.jpg';
+			$n3 = 0;
+			mkdir($name_scene . $n1 . '/' . $n2,0777,true);
+			echo "<p class='text'>";
 
+			while ($n3 <= $n3_max) {
+
+				$n4=0;
+				while ($n4 <= $n4_max) {
+
+					unset($url_img,$img_name);//чистка переменных
+					$img_name = $n3 . '_' . $n4 . '.jpg'; //имя изображения
+					$url_img =  $url . $n1 . '/' . $n2 . '/'. $img_name; //путь до изображения
+
+
+					// проверка на 404
+					echo $url_img . '<br>';
 					if (get_http_response_code($url_img) == 200) {
-						echo $url_img . '<br>';
-					}
+							
+							if (mkdir($name_scene . $n1 . '/' . $n2,0777,true)) {//создание каталога
+								// echo "dir yes: " . $n1 . '/' . $n2 . "<br>";
+							}else{
+								// echo "dir no: " . $n1 . '/' . $n2 . "<br>";
+							};
 
-					// echo if_404($url_img);
-				$n4++;
+							$path = $name_scene . $n1 . '/' . $n2 . '/' . $img_name;//куда сохранять картинку
+
+							file_put_contents($path, file_get_contents($url_img));//сохранение картинки
+							echo $url_img . '<br>';//вывод URL картинки
+						}
+
+						// echo if_404($url_img);
+					$n4++;
+				};
+				$n3++;
 			};
-			$n3++;
+
+			echo "</p><hr>";
+			$n2++;
 		};
 
-		echo "</p><hr>";
-		$n2++;
-	};
+	// mobile
+	unset($img_name_mobile,$url_img_mobile);
 
-// 	$n1++;
-// };
+	$img_name_mobile = $n1 . '.jpg';
+	$url_img_mobile	= $url . 'mobile/'. $img_name_mobile;
+
+	if (get_http_response_code($url_img_mobile) == 200) {
+								
+		if (mkdir($name_scene . 'mobile',0777,true)) {//создание каталога
+			// echo "dir yes: " . $n1 . '/' . $n2 . "<br>";
+		}else{
+			// echo "dir no: " . $n1 . '/' . $n2 . "<br>";
+		};
+
+		$path = $name_scene . 'mobile/' . $img_name_mobile;//куда сохранять картинку
+
+		file_put_contents($path, file_get_contents($url_img_mobile));//сохранение картинки
+		echo $url_img_mobile . '<br>';//вывод URL картинки
+	}
+	// .mobile
+
+	echo "<hr><hr><hr>";
+		$n1++;
+	};//перебор файлов изображений
+
+
+
+};//перебор сцен
 
 
 function if_404($url){
@@ -127,7 +235,7 @@ $(".text").click(function(){
 	elem = this;
 	console.log(elem);
     select(elem);
-    document.execCommand("copy");
+    // document.execCommand("copy");
 });
 
 
