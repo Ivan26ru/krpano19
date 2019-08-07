@@ -25,32 +25,13 @@
 
 // массив сцен
 $scene_arr = array(
-	"lobby2_13",
-	"lobby1_17",
-	"bar_19",
-	"chocolate_corridor_24",
-	"massage_29",
-	"chocolate_32",
-	"shop_68",
-	"cappuccino_corridor_99",
-	"cappuccino_diamond_144",
-	"diamond_corridor_149",
-	"locker_vip_156",
-	"locker_men_159",
-	"magnolia_corridor_164",
-	"locker_kids_168",
-	"locker_women1_172",
-	"locker_women2_174",
-	"new_york_corridor_181",
-	"new_york_183",
-	"solarium_185",
-	"magnolia_191",
-	"street_new_10",
-
+	"pano_37",
+	"pano_39",
 );
 
+$name_panorama = "novostroj/";
 
-$url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог панорамы
+$url_krpano = "http://3d-realty.ru/1k17-2/2kvdata/";//каталог панорамы
 
 	// $url_img="http://www.dance-school.moscow/3d-tourdata/street_new_10/0/0/1_1.jpg";
 
@@ -66,7 +47,7 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
     
 	while ($n1 <= $n1_max) {
 		$n2 = 0;
-		mkdir($name_scene . $n1,0777,true);
+		mkdir($name_panorama . $name_scene . $n1,0777,true);
 
 		while ($n2 <= $n2_max) {
 			switch ($n2) {
@@ -97,7 +78,7 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 			}
 
 			$n3 = 0;
-			mkdir($name_scene . $n1 . '/' . $n2,0777,true);
+			mkdir($name_panorama . $name_scene . $n1 . '/' . $n2,0777,true);
 			// echo "<p class='text'>";
 
 			while ($n3 <= $n3_max) {
@@ -114,13 +95,13 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 					// echo $url_img . '<br>';
 					if (get_http_response_code($url_img) == 200) {
 							
-							if (mkdir($name_scene . $n1 . '/' . $n2,0777,true)) {//создание каталога
+							if (mkdir($name_panorama . $name_scene . $n1 . '/' . $n2,0777,true)) {//создание каталога
 								// echo "dir yes: " . $n1 . '/' . $n2 . "<br>";
 							}else{
 								// echo "dir no: " . $n1 . '/' . $n2 . "<br>";
 							};
 
-							$path = $name_scene . $n1 . '/' . $n2 . '/' . $img_name;//куда сохранять картинку
+							$path = $name_panorama . $name_scene . $n1 . '/' . $n2 . '/' . $img_name;//куда сохранять картинку
 
 							file_put_contents($path, file_get_contents($url_img));//сохранение картинки
 							// echo $url_img . '<br>';//вывод URL картинки
@@ -144,13 +125,13 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 
 	if (get_http_response_code($url_img_mobile) == 200) {
 								
-		if (mkdir($name_scene . 'mobile',0777,true)) {//создание каталога
+		if (mkdir($name_panorama . $name_scene . 'mobile',0777,true)) {//создание каталога
 			// echo "dir yes: " . $n1 . '/' . $n2 . "<br>";
 		}else{
 			// echo "dir no: " . $n1 . '/' . $n2 . "<br>";
 		};
 
-		$path = $name_scene . 'mobile/' . $img_name_mobile;//куда сохранять картинку
+		$path = $name_panorama . $name_scene . 'mobile/' . $img_name_mobile;//куда сохранять картинку
 
 		file_put_contents($path, file_get_contents($url_img_mobile));//сохранение картинки
 		// echo $url_img_mobile . '<br>';//вывод URL картинки
@@ -162,8 +143,8 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 	};//перебор файлов изображений
 
 
-mkdir($name_scene,0777,true);
-file_put_contents($name_scene . 'preview.jpg', file_get_contents($url . 'preview.jpg'));//сохранение картинки
+mkdir($name_panorama . $name_scene,0777,true);
+file_put_contents($name_panorama . $name_scene . 'preview.jpg', file_get_contents($url . 'preview.jpg'));//сохранение картинки
 
 };//перебор сцен
 
