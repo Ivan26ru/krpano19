@@ -25,7 +25,6 @@
 
 // массив сцен
 $scene_arr = array(
-	"street_new_10",
 	"lobby2_13",
 	"lobby1_17",
 	"bar_19",
@@ -46,6 +45,7 @@ $scene_arr = array(
 	"new_york_183",
 	"solarium_185",
 	"magnolia_191 ",
+	"street_new_10",
 
 );
 
@@ -58,8 +58,9 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
   
   // перебор сцен
   foreach ($scene_arr as $name_scene) {
+  	$n1=0;
 	$name_scene = $name_scene . '/';
-    echo $name_scene;
+    echo $name_scene . '<br>';
     unset($url);
 	$url= $url_krpano . $name_scene;//каталог сцены
     
@@ -97,7 +98,7 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 
 			$n3 = 0;
 			mkdir($name_scene . $n1 . '/' . $n2,0777,true);
-			echo "<p class='text'>";
+			// echo "<p class='text'>";
 
 			while ($n3 <= $n3_max) {
 
@@ -110,7 +111,7 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 
 
 					// проверка на 404
-					echo $url_img . '<br>';
+					// echo $url_img . '<br>';
 					if (get_http_response_code($url_img) == 200) {
 							
 							if (mkdir($name_scene . $n1 . '/' . $n2,0777,true)) {//создание каталога
@@ -122,7 +123,7 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 							$path = $name_scene . $n1 . '/' . $n2 . '/' . $img_name;//куда сохранять картинку
 
 							file_put_contents($path, file_get_contents($url_img));//сохранение картинки
-							echo $url_img . '<br>';//вывод URL картинки
+							// echo $url_img . '<br>';//вывод URL картинки
 						}
 
 						// echo if_404($url_img);
@@ -131,7 +132,7 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 				$n3++;
 			};
 
-			echo "</p><hr>";
+			// echo "</p><hr>";
 			$n2++;
 		};
 
@@ -152,18 +153,24 @@ $url_krpano = "http://www.dance-school.moscow/3d-tourdata/";//каталог п�
 		$path = $name_scene . 'mobile/' . $img_name_mobile;//куда сохранять картинку
 
 		file_put_contents($path, file_get_contents($url_img_mobile));//сохранение картинки
-		echo $url_img_mobile . '<br>';//вывод URL картинки
+		// echo $url_img_mobile . '<br>';//вывод URL картинки
 	}
 	// .mobile
 
-	echo "<hr><hr><hr>";
+	// echo "<hr><hr><hr>";
 		$n1++;
 	};//перебор файлов изображений
 
 
+mkdir($name_scene,0777,true);
+file_put_contents($name_scene . 'preview.jpg', file_get_contents($url . 'preview.jpg'));//сохранение картинки
 
 };//перебор сцен
 
+echo "<h1>Done!</h1>";
+echo "<pre>";
+print_r($scene_arr);
+echo "</pre>";
 
 function if_404($url){
 
