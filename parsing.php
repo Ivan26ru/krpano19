@@ -44,7 +44,7 @@ $scene_arr = array(
 	"new_york_corridor_181",
 	"new_york_183",
 	"solarium_185",
-	"magnolia_191 ",
+	"magnolia_191",
 	"street_new_10",
 
 );
