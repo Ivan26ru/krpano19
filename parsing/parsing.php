@@ -13,8 +13,9 @@
 	$n1 = 0;
 	$n1_max = 5;
 
+	// качество изображения, чем лучше качество тем больше максимальное число
 	$n2 = 0;
-	$n2_max = 3;
+	$n2_max = 1;
 
 
 	$n3 = 0;
@@ -25,13 +26,20 @@
 
 // массив сцен
 $scene_arr = array(
-	"pano_37",
-	"pano_39",
+'_1_1_10',
+'_1_2_11',
+'_1_3_12',
+'_1_4_13',
 );
 
-$name_panorama = "novostroj/";
 
-$url_krpano = "http://3d-realty.ru/1k17-2/2kvdata/";//каталог панорамы
+// http://www.krasotka-kupchino.ru/3d-tur/krasotka_pcdata/_1_1_10/1/0/0_1.jpg
+
+// в какую папку будет сохраняться изображения
+$name_panorama = "krasotka_pc/";
+
+
+$url_krpano = "http://www.krasotka-kupchino.ru/3d-tur/krasotka_pcdata/";//каталог панорамы
 
 	// $url_img="http://www.dance-school.moscow/3d-tourdata/street_new_10/0/0/1_1.jpg";
 
@@ -50,6 +58,7 @@ $url_krpano = "http://3d-realty.ru/1k17-2/2kvdata/";//каталог панор�
 		mkdir($name_panorama . $name_scene . $n1,0777,true);
 
 		while ($n2 <= $n2_max) {
+			// количество названий изображений, надо менять в зависимости от панорамы
 			switch ($n2) {
 				case 0:
 					$n3_max = 1;
@@ -57,8 +66,8 @@ $url_krpano = "http://3d-realty.ru/1k17-2/2kvdata/";//каталог панор�
 					break;
 				
 				case 1:
-					$n3_max = 2;
-					$n4_max = 2;
+					$n3_max = 3;
+					$n4_max = 3;
 					break;
 				
 				case 2:
