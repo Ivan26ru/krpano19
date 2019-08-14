@@ -40,8 +40,6 @@ $name_panorama = "sauna";
 $url_krpano = "https://natopil.ru/upload/sauna_vtour/panos/";//каталог панорамы
 
 	// $url_img="http://www.dance-school.moscow/3d-tourdata/street_new_10/0/0/1_1.jpg";
-
-	// echo if_404($url_img);
   
   // перебор сцен
   foreach ($scene_arr as $name_scene) {
