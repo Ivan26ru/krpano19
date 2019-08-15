@@ -16,7 +16,7 @@
 
 	$n2 = 0;
 	// качество изображения, чем лучше качество тем больше максимальное число
-	$n2_max = 0;
+	$n2_max = 2;
 
 
 	$n3 = 0;
@@ -27,20 +27,20 @@
 
 // массив сцен
 $scene_arr = array(
-// '_01s4_182',
-// '_02s6_220',
-// '_04s1_228',
-// '_03_24',
-// 'pano_262',
-// '_09s_264',
-// '_05_26',
-// '_15_266',
-// '_06_108',
-// '_07_28',
+'_01s4_182',
+'_02s6_220',
+'_04s1_228',
+'_03_24',
+'pano_262',
+'_09s_264',
+'_05_26',
+'_15_266',
+'_06_108',
+'_07_28',
 '_14_173',
-// '_13_117',
-// '_12_112',
-// '_10_110',
+'_13_117',
+'_12_112',
+'_10_110',
 );
 
 $device = array(
@@ -61,176 +61,199 @@ $url_krpano = "https://maghockey.com/o-centre-magii-hokkeya/3d-tur-po-magii-hokk
   
   // перебор сцен
   foreach ($scene_arr as $name_scene) {
+
   	$n1=0;
 	$name_scene = $name_scene . '/';
     echo $name_scene . '<br>';
     unset($url);
 	$url= $url_krpano . $name_scene;//каталог сцены
     
+
+
+if (get_http_response_code($url . '0/0/0_0.jpg') == 200 || get_http_response_code($url . 'mobile/0.jpg') == 200) {
+	# code...
+
 	while ($n1 <= $n1_max) {
 		$n2 = 0;
-		// mkdir($name_panorama . $name_scene . $n1,0777,true);
 
-		while ($n2 <= $n2_max) {
-			// количество названий изображений, надо менять в зависимости от панорамы
-			switch ($n2) {
-				case 0:
-					$n3_max = 1;
-					$n4_max = 1;
-					break;
-				
-				case 1:
-					$n3_max = 3;
-					$n4_max = 3;
-					break;
-				
-				case 2:
-					$n3_max = 5;
-					$n4_max = 5;
-					break;
-				
-				case 3:
-					$n3_max = 11;
-					$n4_max = 11;
-					break;
-				
-				default:
-					$n3_max = 15;
-					$n4_max = 15;
-					break;
-			};
-
-			$n3 = 0;
-			// mkdir($name_panorama . $name_scene . $n1 . '/' . $n2,0777,true);
-			// echo "<p class='text'>";
-
-			while ($n3 <= $n3_max) {
-
-				$n4=0;
-				while ($n4 <= $n4_max) {
-
-					unset($url_img,$img_name);//чистка переменных
-					$img_name = $n3 . '_' . $n4 . '.jpg'; //имя изображения
-					$url_img =  $url . $n1 . '/' . $n2 . '/'. $img_name; //путь до изображения
-
-
-					echo $url_img . '<br>';
-					
-					// проверка на 404
-					if (get_http_response_code($url_img) == 200) {
-							
-							if (mkdir($name_panorama . $name_scene . $n1 . '/' . $n2,0777,true)) {//создание каталога
-								// echo "dir yes: " . $n1 . '/' . $n2 . "<br>";
-							}else{
-								// echo "dir no: " . $n1 . '/' . $n2 . "<br>";
-							};
-
-							$path = $name_panorama . $name_scene . $n1 . '/' . $n2 . '/' . $img_name;//куда сохранять картинку
-
-							file_put_contents($path, file_get_contents($url_img));//сохранение картинки
-							// echo $url_img . '<br>';//вывод URL картинки
-						}
-
-						// echo if_404($url_img);
-					$n4++;
-				};
-				$n3++;
-			};
-
-			// echo "</p><hr>";
-			$n2++;
-		};//n2
-
-foreach ($device as $device_this) {
-	// mobile
-	unset($img_name_device,$url_img_device);
-
-	$img_name_device = $n1 . '.jpg';
-	$url_img_device	= $url . $device_this . '/'. $img_name_device;
-
-	if (get_http_response_code($url_img_device) == 200) {
-								
-		if (mkdir($name_panorama . $name_scene . $device_this ,0777,true)) {//создание каталога
-			// echo "dir yes: " . $n1 . '/' . $n2 . "<br>";
-		}else{
-			// echo "dir no: " . $n1 . '/' . $n2 . "<br>";
+		if(!is_dir($name_panorama . $name_scene . $n1)){
+			mkdir($name_panorama . $name_scene . $n1,0777,true);
 		};
 
-		$path = $name_panorama . $name_scene . $device_this . '/' . $img_name_device;//куда сохранять картинку
+		if (get_http_response_code($url . '0/0/0_0.jpg') == 200) {
+		$scene_type[] = array($name_scene => 'cub' );
 
-		file_put_contents($path, file_get_contents($url_img_device));//сохранение картинки
-		echo $url_img_device . '<br>';//вывод URL картинки
-	};// .mobile
+				while ($n2 <= $n2_max) {
+					// количество названий изображений, надо менять в зависимости от панорамы
+					switch ($n2) {
+						case 0:
+							$n3_max = 1;
+							$n4_max = 1;
+							break;
+						
+						case 1:
+							$n3_max = 3;
+							$n4_max = 3;
+							break;
+						
+						case 2:
+							$n3_max = 5;
+							$n4_max = 5;
+							break;
+						
+						case 3:
+							$n3_max = 11;
+							$n4_max = 11;
+							break;
+						
+						default:
+							$n3_max = 15;
+							$n4_max = 15;
+							break;
+					};
 
-};//device
+					$n3 = 0;
+					// mkdir($name_panorama . $name_scene . $n1 . '/' . $n2,0777,true);
+					// echo "<p class='text'>";
+
+					while ($n3 <= $n3_max) {
+
+						$n4=0;
+						while ($n4 <= $n4_max) {
+
+							unset($url_img,$img_name,$this_dir);//чистка переменных
+							$img_name = $n3 . '_' . $n4 . '.jpg'; //имя изображения
+							$url_img =  $url . $n1 . '/' . $n2 . '/'. $img_name; //путь до изображения
 
 
-// CYLINDER
-$cylinder_n1=0;
-$cylinder_n1_max=1;
-
-
-
-while ($cylinder_n1 <= $cylinder_n1_max) {
-$cylinder_n2=0;
-			switch ($cylinder_n1) {
-			case 0:
-				$cylinder_n2_max = 1;
-				$cylinder_n3_max = 2;
-				break;
-			
-			case 1:
-				$cylinder_n2_max = 2;
-				$cylinder_n3_max = 4;
-				break;
-			
-			default:
-				$cylinder_n2_max = 5;
-				$cylinder_n3_max = 5;
-				break;
-			};
-
-			while ($cylinder_n2 <= $cylinder_n2_max) {
-				$cylinder_n3=0;
-				
-				while ($cylinder_n3 <= $cylinder_n3_max) {
-
-					unset($url_img,$img_name,$this_dir);//чистка переменных
-					$img_name = $cylinder_n2 . '_' . $cylinder_n3 . '.jpg'; //имя изображения
-					$url_img =  $url . $cylinder_n1 . '/' . $img_name; //путь до изображения
-
-
-					echo $url_img . '<br>';
-
-				// проверка на 404
-					if (get_http_response_code($url_img) == 200) {
-
-							$this_dir=$name_panorama . $name_scene . $cylinder_n1;
+							// echo $url_img . '<br>';
 							
-							mkdir($this_dir,0777,true);
+							// проверка на 404
+							if (get_http_response_code($url_img) == 200) {
+									
+									$this_dir = $name_panorama . $name_scene . $n1 . '/' . $n2;
 
-							$path = $this_dir . '/' . $img_name;//куда сохранять картинку
+									if(!is_dir($this_dir)){
+										mkdir($this_dir,0777,true);
+									};
 
-							file_put_contents($path, file_get_contents($url_img));//сохранение картинки
-							// echo $url_img . '<br>';//вывод URL картинки
-						}
-					$cylinder_n3++;	
-				};//$cylinder_n3
+									$path = $this_dir . '/' . $img_name;//куда сохранять картинку
 
-				$cylinder_n2++;
-			}; //$cylinder_n2
-	
-	$cylinder_n1++;
-};//$cylinder_n1
+									file_put_contents($path, file_get_contents($url_img));//сохранение картинки
+									// echo $url_img . '<br>';//вывод URL картинки
+								}
 
+								// echo if_404($url_img);
+							$n4++;
+						};
+						$n3++;
+					};
 
+					// echo "</p><hr>";
+					$n2++;
+				};//n2
+		};//if
 
-	// echo "<hr><hr><hr>";
+		if (get_http_response_code($url . 'mobile/0.jpg') == 200) {
+			$scene_type[] = array($name_scene => 'old' );
+			foreach ($device as $device_this) {
+				// mobile
+				unset($img_name_device,$url_img_device,$this_dir);
+
+				$img_name_device = $n1 . '.jpg';
+				$url_img_device	= $url . $device_this . '/'. $img_name_device;
+
+				if (get_http_response_code($url_img_device) == 200) {
+											
+					// $this_dir = $name_panorama . $name_scene . $device_this;								
+					if(!is_dir($this_dir)){
+						mkdir($this_dir,0777,true);
+					};
+
+					$path = $this_dir . '/' . $img_name_device;//куда сохранять картинку
+
+					file_put_contents($path, file_get_contents($url_img_device));//сохранение картинки
+					// echo $url_img_device . '<br>';//вывод URL картинки
+				};// .mobile
+
+			};//device
+
+		};//if old
 		$n1++;
-	};//перебор файлов изображений
+	};
+};// if 2 type
+
+echo $url . '<br>';
+
+	if (get_http_response_code($url . '0/0_0.jpg') == 200) {
+		$scene_type[] = array($name_scene => 'cylinder' );
+	// CYLINDER
+		$cylinder_n1=0;
+		$cylinder_n1_max=2;
+
+			while ($cylinder_n1 <= $cylinder_n1_max) {
+			$cylinder_n2=0;
+						switch ($cylinder_n1) {
+							case 0:
+								$cylinder_n2_max = 1;
+								$cylinder_n3_max = 2;
+								break;
+							
+							case 1:
+								$cylinder_n2_max = 2;
+								$cylinder_n3_max = 4;
+								break;
+							
+							default:
+								$cylinder_n2_max = 4;
+								$cylinder_n3_max = 5;
+								break;
+						};
+
+						while ($cylinder_n2 <= $cylinder_n2_max) {
+							$cylinder_n3=0;
+
+							while ($cylinder_n3 <= $cylinder_n3_max) {
+
+								unset($url_img,$img_name,$this_dir);//чистка переменных
+								$img_name = $cylinder_n2 . '_' . $cylinder_n3 . '.jpg'; //имя изображения
+								$url_img =  $url . $cylinder_n1 . '/' . $img_name; //путь до изображения
 
 
-mkdir($name_panorama . $name_scene,0777,true);
+								// echo $url_img . '<br>';
+
+							// проверка на 404
+								if (get_http_response_code($url_img) == 200) {
+
+										$this_dir=$name_panorama . $name_scene . $cylinder_n1;
+										
+										if(!is_dir($this_dir)){
+											mkdir($this_dir,0777,true);
+										};
+
+										$path = $this_dir . '/' . $img_name;//куда сохранять картинку
+
+										file_put_contents($path, file_get_contents($url_img));//сохранение картинки
+										// echo $url_img . '<br>';//вывод URL картинки
+									}
+								$cylinder_n3++;	
+							};//$cylinder_n3
+
+							$cylinder_n2++;
+						}; //$cylinder_n2
+				
+				$cylinder_n1++;
+			};//$cylinder_n1
+		};//.CYLINDER
+
+
+		// echo "<hr><hr><hr>";
+
+	// };//перебор файлов изображений
+
+if (!is_dir($name_panorama . $name_scene)) {
+	mkdir($name_panorama . $name_scene,0777,true);
+}
 file_put_contents($name_panorama . $name_scene . 'preview.jpg', file_get_contents($url . 'preview.jpg'));//сохранение картинки
 file_put_contents($name_panorama . $name_scene . 'thumbnail.jpg', file_get_contents($url . 'thumbnail.jpg'));//сохранение картинки
 
@@ -238,7 +261,7 @@ file_put_contents($name_panorama . $name_scene . 'thumbnail.jpg', file_get_conte
 
 echo "<h1>Done!</h1>";
 echo "<pre>";
-print_r($scene_arr);
+	print_r($scene_type);
 echo "</pre>";
 
 function if_404($url){
@@ -279,10 +302,10 @@ function get_http_response_code($theURL) {
   crossorigin="anonymous"></script>
 
 	<script>
-console.log('скрипт подключен'); //проверка подключения скрипта
-jQuery(document).ready(function($) { //ожидание полной загрузки дом дерева и возвожность работы со знаком доллара, в движках
-    console.log($); //проверка работоспособности JQuery
-    console.log(jQuery.fn.jquery);//узнать версию JQuery
+		console.log('скрипт подключен'); //проверка подключения скрипта
+		jQuery(document).ready(function($) { //ожидание полной загрузки дом дерева и возвожность работы со знаком доллара, в движках
+		console.log($); //проверка работоспособности JQuery
+		console.log(jQuery.fn.jquery);//узнать версию JQuery
 
 
 	// 	document.execCommand("copy");
