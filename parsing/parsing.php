@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
@@ -27,20 +27,12 @@
 
 // массив сцен
 $scene_arr = array(
-'_01s4_182',
-'_02s6_220',
-'_04s1_228',
-'_03_24',
-'pano_262',
-'_09s_264',
-'_05_26',
-'_15_266',
-'_06_108',
-'_07_28',
-'_14_173',
-'_13_117',
-'_12_112',
-'_10_110',
+'_1_10',
+'_2_12',
+'_3_14',
+'_4_16',
+'_5_18',
+'_6_20',
 );
 
 $device = array(
@@ -52,10 +44,10 @@ $device = array(
 //https://maghockey.com/o-centre-magii-hokkeya/3d-tur-po-magii-hokkeya/pmagic/magic-v1data/_04s1_228/0/1/2_0.jpg
 
 // в какую папку будет сохраняться изображения
-$name_panorama = "maghockey/";
+$name_panorama = "Luchidata/";
 
 
-$url_krpano = "https://maghockey.com/o-centre-magii-hokkeya/3d-tur-po-magii-hokkeya/pmagic/magic-v1data/";//каталог панорамы
+$url_krpano = "http://luchi.moscow/assets/pages/pano3d/Luchidata/";//каталог панорамы
 
 	// echo if_404($url_img);
   
@@ -97,8 +89,8 @@ if (get_http_response_code($url . '0/0/0_0.jpg') == 200 || get_http_response_cod
 							break;
 						
 						case 2:
-							$n3_max = 5;
-							$n4_max = 5;
+							$n3_max = 7;
+							$n4_max = 7;
 							break;
 						
 						case 3:
