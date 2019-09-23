@@ -27,12 +27,11 @@
 
 // массив сцен
 $scene_arr = array(
-'_1_10',
-'_2_12',
-'_3_14',
-'_4_16',
-'_5_18',
-'_6_20',
+'pano_30',
+'pano_31',
+'pano_32',
+'pano_33',
+'pano_34',
 );
 
 $device = array(
@@ -44,10 +43,10 @@ $device = array(
 //https://maghockey.com/o-centre-magii-hokkeya/3d-tur-po-magii-hokkeya/pmagic/magic-v1data/_04s1_228/0/1/2_0.jpg
 
 // в какую папку будет сохраняться изображения
-$name_panorama = "Luchidata/";
+$name_panorama = "jk_souznij/";
 
 
-$url_krpano = "http://luchi.moscow/assets/pages/pano3d/Luchidata/";//каталог панорамы
+$url_krpano = "https://xn----ktbeicufx7g1a.xn--p1ai/3d/indexdata/";//каталог панорамы
 
 	// echo if_404($url_img);
   
