@@ -27,52 +27,51 @@
 
 // массив сцен
 $scene_arr = array(
-'pano_30',
-'pano_31',
-'pano_32',
-'pano_33',
-'pano_34',
+	'pano_1926',
+	'pano_1932',
+	'pano_6322',
 );
 
 $device = array(
-'html5',
-'tablet',
-'mobile',
+	'html5',
+	'tablet',
+	'mobile',
 );
 
 //https://maghockey.com/o-centre-magii-hokkeya/3d-tur-po-magii-hokkeya/pmagic/magic-v1data/_04s1_228/0/1/2_0.jpg
 
 // в какую папку будет сохраняться изображения
-$name_panorama = "jk_souznij/";
+$name_panorama = "volynka/";
 
 
-$url_krpano = "https://xn----ktbeicufx7g1a.xn--p1ai/3d/indexdata/";//каталог панорамы
+$url_krpano = "http://tour.volynka.ru/Volynkadata/";//каталог панорамы
 
 	// echo if_404($url_img);
   
   // перебор сцен
   foreach ($scene_arr as $name_scene) {
 
-  	$n1=0;
 	$name_scene = $name_scene . '/';
     echo $name_scene . '<br>';
     unset($url);
 	$url= $url_krpano . $name_scene;//каталог сцены
     
 
-
 if (get_http_response_code($url . '0/0/0_0.jpg') == 200 || get_http_response_code($url . 'mobile/0.jpg') == 200) {
-	# code...
 
-	while ($n1 <= $n1_max) {
-		$n2 = 0;
-
-		if(!is_dir($name_panorama . $name_scene . $n1)){
-			mkdir($name_panorama . $name_scene . $n1,0777,true);
-		};
 
 		if (get_http_response_code($url . '0/0/0_0.jpg') == 200) {
-		$scene_type[] = array($name_scene => 'cub' );
+		  	$n1=0;
+		  	$scene_type[] = array($name_scene => 'cub' );
+
+			while ($n1 <= $n1_max) {
+				$n2 = 0;
+
+			if(!is_dir($name_panorama . $name_scene . $n1)){
+				mkdir($name_panorama . $name_scene . $n1,0777,true);
+			};
+
+			
 
 				while ($n2 <= $n2_max) {
 					// количество названий изображений, надо менять в зависимости от панорамы
@@ -143,10 +142,27 @@ if (get_http_response_code($url . '0/0/0_0.jpg') == 200 || get_http_response_cod
 					// echo "</p><hr>";
 					$n2++;
 				};//n2
+			$n1++;
+			};//while n1
 		};//if
 
+
+
+
+
+
+
 		if (get_http_response_code($url . 'mobile/0.jpg') == 200) {
-			$scene_type[] = array($name_scene => 'old' );
+	  		$n1=0;
+	  		$scene_type[] = array($name_scene => 'old' );
+			while ($n1 <= $n1_max) {
+			$n2 = 0;
+			// if(!is_dir($name_panorama . $name_scene . $n1)){
+			// 	mkdir($name_panorama . $name_scene . $n1,0777,true);
+			// };
+
+			
+
 			foreach ($device as $device_this) {
 				// mobile
 				unset($img_name_device,$url_img_device,$this_dir);
@@ -155,8 +171,10 @@ if (get_http_response_code($url . '0/0/0_0.jpg') == 200 || get_http_response_cod
 				$url_img_device	= $url . $device_this . '/'. $img_name_device;
 
 				if (get_http_response_code($url_img_device) == 200) {
-											
-					// $this_dir = $name_panorama . $name_scene . $device_this;								
+					// var_dump($url_img_device);
+					// var_dump($this_dir);
+					
+					$this_dir = $name_panorama . $name_scene . $device_this;								
 					if(!is_dir($this_dir)){
 						mkdir($this_dir,0777,true);
 					};
@@ -168,17 +186,21 @@ if (get_http_response_code($url . '0/0/0_0.jpg') == 200 || get_http_response_cod
 				};// .mobile
 
 			};//device
-
+			$n1++;
+			};//while n1
 		};//if old
-		$n1++;
-	};
-};// if 2 type
+
+
+
+
+	};// if 2 type
 
 echo $url . '<br>';
 
 	if (get_http_response_code($url . '0/0_0.jpg') == 200) {
+
 		$scene_type[] = array($name_scene => 'cylinder' );
-	// CYLINDER
+		// CYLINDER
 		$cylinder_n1=0;
 		$cylinder_n1_max=2;
 
